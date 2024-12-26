@@ -10,7 +10,7 @@ namespace Snap
         [SerializeField] [Range(0f, 360f)] private float _offsetRotationFromOrigin;
         private Vector3 _directionTowardsReferenceCircle;
 
-        private void OnDrawGizmos()
+        private void OnDrawGizmosSelected()
         {
             Vector3 midVector = GetDirectionByPercent(0.5f);
             Gizmos.color = Color.green;

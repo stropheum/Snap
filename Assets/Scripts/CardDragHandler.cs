@@ -18,12 +18,15 @@ namespace Snap
         private RaycastHit _currentHoverHit;
         private bool _isDragging;
         private Vector3 _clickOffsetFromCenter;
+        private Vector3 _origin;
+        private Vector3 _currentMoveTarget;
         
         private void Awake()
         {
-            _rigidbody = GetComponent<Rigidbody>();
             _mainCamera = Camera.main;
             Debug.Assert(_mainCamera != null);
+            _rigidbody = GetComponent<Rigidbody>();
+            _origin = transform.position;
         }
 
         private void Start()
@@ -31,9 +34,17 @@ namespace Snap
             BindInputCallbacks();
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             HandleDrag();
+        }
+
+        private void FixedUpdate()
+        {
+            if (_isDragging)
+            {
+                _rigidbody.MovePosition(_currentMoveTarget);   
+            }
         }
 
         private void OnDestroy()
@@ -45,15 +56,29 @@ namespace Snap
         {
             Gizmos.color = Color.green;
             Gizmos.DrawSphere(transform.position, 0.25f);
-            Gizmos.color = Color.red;
-            Gizmos.DrawSphere(transform.position + _clickOffsetFromCenter, 0.25f);
+            if (_isDragging)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawSphere(transform.position + _clickOffsetFromCenter, 0.25f);   
+                Gizmos.color = Color.blue;
+                Gizmos.DrawSphere(_currentMoveTarget, 0.25f);
+            }
+        }
+
+        /// <summary>
+        /// Sets the origin that the card will return to when released
+        /// </summary>
+        /// <param name="newOrigin">The new origin of the card (world space)</param>
+        public void SetOrigin(Vector3 newOrigin)
+        {
+            _origin = newOrigin;
         }
 
         private void BindInputCallbacks()
         {
             InputManager.Point += InputManagerOnPoint;
             InputManager.Click += InputManagerOnClick;
-            InputManager.Cancel += context => Debug.Log("Canceled");
+            InputManager.Cancel += _ => Debug.Log("Canceled");
         }
 
         private void UnbindInputCallbacks()
@@ -71,28 +96,24 @@ namespace Snap
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _layerMask))
             {
                 _currentHoverHit = hit;
-                _clickOffsetFromCenter = hit.point - hit.collider.transform.position;
             }
         }
 
         private void InputManagerOnClick(InputAction.CallbackContext context)
         {
+            if (context.canceled)
+            {
+                _isDragging = false;
+                return;
+            }
+
             if (context.started)
             {
-                if (IsHovered)
-                {
-                    Debug.Log("Started Dragging: " + _currentHoverHit.collider.gameObject.name);
-                    _isDragging = true;
-                }
-            }
-            else if (context.canceled)
-            {
-                Debug.Log("Stopped Dragging: " + _currentHoverHit.collider.gameObject.name);
-                _isDragging = false;
-            }
-            else if (context.performed)
-            {
-                Debug.Log("Performed");
+                if (!IsHovered) { return; }
+                
+                Debug.Log("Started Dragging: " + _currentHoverHit.collider.gameObject.name);
+                _clickOffsetFromCenter = _currentHoverHit.point - _currentHoverHit.collider.transform.position;
+                _isDragging = true;
             }
         }
 
@@ -100,15 +121,10 @@ namespace Snap
         {
             if (!_isDragging) { return; }
             Debug.Log("Dragging: " + gameObject.name);
-            Vector3 hitPoint = _currentHoverHit.point;
-            // var moveTarget = new Vector3(hitPoint.x + _clickOffsetFromCenter.x, hitPoint.y + _clickOffsetFromCenter.y, _rigidbody.position.z);
-            Vector3 moveTarget = _currentHoverHit.point;
+            Vector3 moveTarget = _currentHoverHit.point - _clickOffsetFromCenter;
             moveTarget.z = _rigidbody.position.z;
-            Vector3 newPosition = Vector3.Lerp(_rigidbody.position, moveTarget, Time.fixedDeltaTime * _moveSpeed);
-            _rigidbody.MovePosition(newPosition);
-            // moveTarget.z = _rigidbody.position.z;
-            // Debug.DrawLine(_rigidbody.position, moveTarget, Color.green);
-            // _rigidbody.MovePosition(moveTarget);
+            _currentMoveTarget = Vector3.Lerp(_rigidbody.position, moveTarget, Time.fixedDeltaTime * _moveSpeed);
+            // _rigidbody.MovePosition(newPosition);
         }
     }
 }
