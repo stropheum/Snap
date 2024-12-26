@@ -26,7 +26,7 @@ namespace Snap
             _mainCamera = Camera.main;
             Debug.Assert(_mainCamera != null);
             _rigidbody = GetComponent<Rigidbody>();
-            _origin = transform.position;
+            SetOrigin(transform.position);
         }
 
         private void Start()
@@ -41,10 +41,7 @@ namespace Snap
 
         private void FixedUpdate()
         {
-            if (_isDragging)
-            {
-                _rigidbody.MovePosition(_currentMoveTarget);   
-            }
+            _rigidbody.MovePosition(_currentMoveTarget);   
         }
 
         private void OnDestroy()
@@ -119,12 +116,15 @@ namespace Snap
 
         private void HandleDrag()
         {
-            if (!_isDragging) { return; }
+            if (!_isDragging)
+            {
+                _currentMoveTarget = Vector3.Lerp(_rigidbody.position, _origin, _moveSpeed * Time.fixedDeltaTime);
+                return;
+            }
             Debug.Log("Dragging: " + gameObject.name);
             Vector3 moveTarget = _currentHoverHit.point - _clickOffsetFromCenter;
             moveTarget.z = _rigidbody.position.z;
-            _currentMoveTarget = Vector3.Lerp(_rigidbody.position, moveTarget, Time.fixedDeltaTime * _moveSpeed);
-            // _rigidbody.MovePosition(newPosition);
+            _currentMoveTarget = Vector3.Lerp(_rigidbody.position, moveTarget, _moveSpeed * Time.fixedDeltaTime);
         }
     }
 }
