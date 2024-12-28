@@ -87,7 +87,7 @@ namespace Snap
                 Gizmos.matrix = Matrix4x4.TRS(child.position, child.rotation, Vector3.one);
                 Gizmos.color = gradient.Evaluate(i / (float)childCount);
                 Gizmos.DrawSphere(Vector3.zero, 0.25f);
-                Gizmos.DrawWireCube(Vector3.zero, new Vector3(2.5f, 3.5f, 0.1f));
+                Gizmos.DrawWireCube(Vector3.zero, new Vector3(5.25f, 7.25f, 0.1f));
             }
         }
     }
