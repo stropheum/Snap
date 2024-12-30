@@ -1,3 +1,4 @@
+using System;
 using Snap.Core;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -7,10 +8,24 @@ namespace Snap
     [RequireComponent(typeof(Rigidbody))]
     public class CardDragHandler : MonoBehaviour
     {
+        public static event Action<CardDragHandler> DragStateChanged;
         private const float DragPlaneDepth = -2f;
         
         private bool IsHovered => _currentHoverHit.collider != null && _currentHoverHit.collider.gameObject == gameObject;
-        
+
+        public bool IsDragging
+        {
+            get => _isDragging;
+            private set
+            {
+                if (_isDragging != value)
+                {
+                    _isDragging = value;
+                    DragStateChanged?.Invoke(this);
+                }
+            }
+        }
+
         [SerializeField] private LayerMask _layerMask;
         [SerializeField] private float _moveSpeed = 12f;
         [SerializeField] private float _dragRotationSpeed = 12f;
@@ -20,13 +35,13 @@ namespace Snap
         private Camera _mainCamera;
         private Vector2 _currentMousePosition;
         private RaycastHit _currentHoverHit;
-        private bool _isDragging;
         private Vector3 _clickOffsetFromCenter;
         private Vector3 _origin;
         private Quaternion _originRotation;
         private Vector3 _currentMoveTarget;
         private Quaternion _currentRotationTarget;
-        
+        private bool _isDragging;
+
         private void Awake()
         {
             _mainCamera = Camera.main;
@@ -61,7 +76,7 @@ namespace Snap
         {
             Gizmos.color = Color.green;
             Gizmos.DrawSphere(transform.position, 0.25f);
-            if (_isDragging)
+            if (IsDragging)
             {
                 Gizmos.color = Color.red;
                 Gizmos.DrawSphere(transform.position + _clickOffsetFromCenter, 0.25f);   
@@ -74,7 +89,7 @@ namespace Snap
         /// Sets the origin that the card will return to when released
         /// </summary>
         /// <param name="newOrigin">The new origin of the card (world space)</param>
-        public void SetOrigin(Vector3 newOrigin)
+        private void SetOrigin(Vector3 newOrigin)
         {
             _origin = newOrigin;
         }
@@ -83,25 +98,25 @@ namespace Snap
         /// Sets the origin rotation that the card will return to when released
         /// </summary>
         /// <param name="newOriginRotation"></param>
-        public void SetOriginRotation(Quaternion newOriginRotation)
+        private void SetOriginRotation(Quaternion newOriginRotation)
         {
             _originRotation = newOriginRotation;
         }
 
         private void BindInputCallbacks()
         {
-            InputManager.Point += InputManagerOnPoint;
-            InputManager.Click += InputManagerOnClick;
+            InputManager.Point += InputManager_OnPoint;
+            InputManager.Click += InputManager_OnClick;
             InputManager.Cancel += _ => Debug.Log("Canceled");
         }
 
         private void UnbindInputCallbacks()
         {
-            InputManager.Point -= InputManagerOnPoint;            
-            InputManager.Click -= InputManagerOnClick;
+            InputManager.Point -= InputManager_OnPoint;            
+            InputManager.Click -= InputManager_OnClick;
         }
 
-        private void InputManagerOnPoint(InputAction.CallbackContext context)
+        private void InputManager_OnPoint(InputAction.CallbackContext context)
         {
             if (_mainCamera == null) { return; }
             _currentMousePosition = context.ReadValue<Vector2>();
@@ -113,11 +128,11 @@ namespace Snap
             }
         }
 
-        private void InputManagerOnClick(InputAction.CallbackContext context)
+        private void InputManager_OnClick(InputAction.CallbackContext context)
         {
             if (context.canceled)
             {
-                _isDragging = false;
+                IsDragging = false;
                 return;
             }
 
@@ -126,13 +141,13 @@ namespace Snap
                 if (!IsHovered) { return; }
                 
                 _clickOffsetFromCenter = _currentHoverHit.point - _currentHoverHit.collider.transform.position;
-                _isDragging = true;
+                IsDragging = true;
             }
         }
 
         private void HandleDrag()
         {
-            if (!_isDragging)
+            if (!IsDragging)
             {
                 _currentMoveTarget = Vector3.Lerp(_rigidbody.position, _origin, _moveSpeed * Time.fixedDeltaTime);
                 return;
@@ -147,7 +162,7 @@ namespace Snap
             float direction = Vector3.Dot(Vector3.right, _rigidbody.linearVelocity.normalized) * _maxDragRotationAngle;
             Quaternion rot = Quaternion.Lerp(
                 _rigidbody.rotation, 
-                _isDragging ? Quaternion.Euler(0f, direction, 0f) : _originRotation, 
+                IsDragging ? Quaternion.Euler(0f, direction, 0f) : _originRotation, 
                 Time.fixedDeltaTime * _dragRotationSpeed);
             _rigidbody.MoveRotation(rot);
         }
