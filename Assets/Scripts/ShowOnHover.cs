@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Snap.Core;
 using UnityEngine;
@@ -8,6 +9,8 @@ namespace Snap
     [RequireComponent(typeof(SpriteRenderer))]
     public class ShowOnHover : MonoBehaviour
     {
+        public event Action<bool> HoverStateChanged;
+        
         [SerializeField] private LayerMask _layerMask;
         private SpriteRenderer _spriteRenderer;
         private Camera _mainCamera;
@@ -18,6 +21,10 @@ namespace Snap
         {
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _mainCamera = Camera.main;
+        }
+
+        private void Start()
+        {
             InputManager.Point += InputManager_OnPoint; 
             CardDragHandler.DragStateChanged += CardDragHandler_OnDragStateChanged;
         }
@@ -38,11 +45,15 @@ namespace Snap
             var mousePosition = context.ReadValue<Vector2>();
 
             Ray ray = _mainCamera.ScreenPointToRay(mousePosition);
-            _isHovered = Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _layerMask)
+            bool isHovered = Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _layerMask)
                 && hit.collider.gameObject == gameObject;
             
+            if (_isHovered == isHovered) { return; }
+            
             //TODO: Temp code. Instead of instantly changing alpha, trigger coroutine to lerp alpha
+            _isHovered = isHovered;
             _spriteRenderer.color = _isHovered ? Color.green : Color.white;
+            HoverStateChanged?.Invoke(_isHovered);
         }
 
         /// <summary>
