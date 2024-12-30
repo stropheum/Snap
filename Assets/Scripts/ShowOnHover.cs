@@ -5,15 +5,18 @@ using UnityEngine.InputSystem;
 
 namespace Snap
 {
+    [RequireComponent(typeof(SpriteRenderer))]
     public class ShowOnHover : MonoBehaviour
     {
         [SerializeField] private LayerMask _layerMask;
+        private SpriteRenderer _spriteRenderer;
         private Camera _mainCamera;
         private HashSet<CardDragHandler> _activeCardDragHandlers = new();
         private bool _isHovered;
 
         private void Awake()
         {
+            _spriteRenderer = GetComponent<SpriteRenderer>();
             _mainCamera = Camera.main;
             InputManager.Point += InputManager_OnPoint; 
             CardDragHandler.DragStateChanged += CardDragHandler_OnDragStateChanged;
@@ -31,11 +34,15 @@ namespace Snap
         /// <param name="context">Callback context</param>
         private void InputManager_OnPoint(InputAction.CallbackContext context)
         {
-            if (_mainCamera == null) { return; }
+            if (_mainCamera == null || _activeCardDragHandlers.Count == 0) { return; }
             var mousePosition = context.ReadValue<Vector2>();
 
             Ray ray = _mainCamera.ScreenPointToRay(mousePosition);
-            _isHovered = Physics.Raycast(ray, out RaycastHit _, Mathf.Infinity, _layerMask);
+            _isHovered = Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _layerMask)
+                && hit.collider.gameObject == gameObject;
+            
+            //TODO: Temp code. Instead of instantly changing alpha, trigger coroutine to lerp alpha
+            _spriteRenderer.color = _isHovered ? Color.green : Color.white;
         }
 
         /// <summary>
