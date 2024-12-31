@@ -29,6 +29,7 @@ namespace Snap
         [SerializeField] private LayerMask _layerMask;
         [SerializeField] private float _moveSpeed = 12f;
         [SerializeField] private float _dragRotationSpeed = 12f;
+        [SerializeField] private float _dragRotationDampening = 100f;
         [SerializeField] [Range(0f, 30f)] private float _maxDragRotationAngle = 30f;
         
         private Rigidbody _rigidbody;
@@ -159,11 +160,16 @@ namespace Snap
         
         private void HandleDragRotation()
         {
-            float direction = Vector3.Dot(Vector3.right, _rigidbody.linearVelocity.normalized) * _maxDragRotationAngle;
-            Quaternion rot = Quaternion.Lerp(
-                _rigidbody.rotation, 
-                IsDragging ? Quaternion.Euler(0f, direction, 0f) : _originRotation, 
-                Time.fixedDeltaTime * _dragRotationSpeed);
+            if (!_isDragging)
+            {
+                _rigidbody.MoveRotation(_originRotation);
+                return;
+            }
+
+            float percentMaxSpeed = _rigidbody.linearVelocity.magnitude / _dragRotationDampening;
+            float percent = Vector3.Dot(Vector3.right, _rigidbody.linearVelocity.normalized) * percentMaxSpeed;
+            float direction = percent * _maxDragRotationAngle;
+            Quaternion rot = Quaternion.Euler(0f, direction, 0f);
             _rigidbody.MoveRotation(rot);
         }
     }
