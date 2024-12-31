@@ -5,9 +5,10 @@ namespace Snap
 {
     public class CircularLayout : MonoBehaviour
     {
-        [SerializeField] [Range(0f, 180f)] private float _radius;
+        [SerializeField] [Range(0f, 1024f)] private float _radius;
         [SerializeField] [Range(0f, 360f)] private float _groupingAngle;
         [SerializeField] [Range(0f, 360f)] private float _offsetRotationFromOrigin;
+        [SerializeField] private float _zOffsetPerIndex = 0.2f;
         private Vector3 _directionTowardsReferenceCircle;
 
         private void OnDrawGizmosSelected()
@@ -45,7 +46,7 @@ namespace Snap
                 float mid = MapToRadByGroupingAngle(0.5f) + (_offsetRotationFromOrigin * Mathf.Deg2Rad);
                 _directionTowardsReferenceCircle = new Vector3(Mathf.Cos(mid), Mathf.Sin(mid), 0).normalized;
 
-                Vector3 newPosition = (unitVector * _radius) - (_directionTowardsReferenceCircle * _radius);
+                Vector3 newPosition = (unitVector * _radius) - (_directionTowardsReferenceCircle * _radius) + new Vector3(0f, 0f, _zOffsetPerIndex * i);
                 child.localPosition = newPosition;
             }
         }
