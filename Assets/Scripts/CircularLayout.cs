@@ -8,7 +8,7 @@ namespace Snap
         [SerializeField] [Range(0f, 1024f)] private float _radius;
         [SerializeField] [Range(0f, 360f)] private float _groupingAngle;
         [SerializeField] [Range(0f, 360f)] private float _offsetRotationFromOrigin;
-        [SerializeField] private float _zOffsetPerIndex = 0.2f;
+        [SerializeField] private float _yRotation = 5f;
         private Vector3 _directionTowardsReferenceCircle;
 
         private void OnDrawGizmosSelected()
@@ -42,19 +42,19 @@ namespace Snap
                 Transform child = transform.GetChild(i);
                 float radians = MapToRadByGroupingAngle(percent) + (_offsetRotationFromOrigin * Mathf.Deg2Rad);
                 var unitVector = new Vector3(Mathf.Cos(radians), Mathf.Sin(radians), 0);
-                child.localRotation = Quaternion.Euler(new Vector3(0f, 0f, -90f + radians * Mathf.Rad2Deg));
+                child.localRotation = Quaternion.Euler(new Vector3(0f, _yRotation, -90f + radians * Mathf.Rad2Deg));
                 float mid = MapToRadByGroupingAngle(0.5f) + (_offsetRotationFromOrigin * Mathf.Deg2Rad);
                 _directionTowardsReferenceCircle = new Vector3(Mathf.Cos(mid), Mathf.Sin(mid), 0).normalized;
 
-                Vector3 newPosition = (unitVector * _radius) - (_directionTowardsReferenceCircle * _radius) + new Vector3(0f, 0f, _zOffsetPerIndex * i);
+                Vector3 newPosition = (unitVector * _radius) - (_directionTowardsReferenceCircle * _radius);
                 child.localPosition = newPosition;
             }
         }
 
         private float MapToRadByGroupingAngle(float percent)
         {
-            float maxRad = _groupingAngle * (Mathf.Deg2Rad * 0.5f);
-            float minRad = -_groupingAngle * (Mathf.Deg2Rad * 0.5f);
+            float maxRad = _groupingAngle * Mathf.Deg2Rad * 0.5f;
+            float minRad = -_groupingAngle * Mathf.Deg2Rad * 0.5f;
             return Math.Map(1f - percent, 0f, 1f, minRad, maxRad);
         }
 
