@@ -8,7 +8,7 @@ namespace Snap.Core
     using CallbackContext = InputAction.CallbackContext;
     
     [RequireComponent(typeof(PlayerInput))]
-    public class InputManager : MonoBehaviour
+    public class InputManager : Singleton<InputManager>
     {
         public static event Action<CallbackContext> Navigate;
         public static event Action<CallbackContext> Submit;
@@ -22,15 +22,6 @@ namespace Snap.Core
         public static event Action<CallbackContext> TrackedDeviceOrientation;
         
         private static InputManager _instance;
-
-        private void Awake()
-        {
-            if (_instance != null)
-            {
-                Debug.LogError("More than one InputManager in scene. Destroying duplicate instance");
-                Destroy(this);
-            }
-        }
 
         [UsedImplicitly(ImplicitUseKindFlags.Assign)]
         public void OnNavigate(CallbackContext context)

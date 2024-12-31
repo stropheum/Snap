@@ -524,10 +524,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7280379649993458958, guid: 78ce408052c27014cb5d537665a5d094, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7396885412264842003, guid: 78ce408052c27014cb5d537665a5d094, type: 3}
       propertyPath: m_Name
       value: Game Board

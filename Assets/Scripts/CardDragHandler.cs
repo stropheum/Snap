@@ -1,5 +1,6 @@
 using System;
 using Snap.Core;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -26,11 +27,13 @@ namespace Snap
             }
         }
 
-        [SerializeField] private LayerMask _layerMask;
+        [SerializeField] private LayerMask _defaultLayerMask;
+        [SerializeField] private LayerMask _draggingLayerMask;
         [SerializeField] private float _moveSpeed = 12f;
         [SerializeField] private float _dragRotationSpeed = 12f;
         [SerializeField] private float _dragRotationDampening = 100f;
         [SerializeField] [Range(0f, 30f)] private float _maxDragRotationAngle = 30f;
+        [SerializeField] private TextMeshPro _debugText;
         
         private Rigidbody _rigidbody;
         private Camera _mainCamera;
@@ -123,9 +126,13 @@ namespace Snap
             _currentMousePosition = context.ReadValue<Vector2>();
 
             Ray ray = _mainCamera.ScreenPointToRay(_currentMousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _layerMask))
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _isDragging ? _draggingLayerMask : _defaultLayerMask))
             {
                 _currentHoverHit = hit;
+                if (_debugText != null)
+                {
+                    _debugText.text = "Hit: " + _currentHoverHit.collider.gameObject.name;
+                }
             }
         }
 
@@ -154,7 +161,9 @@ namespace Snap
                 return;
             }
             Vector3 moveTarget = _currentHoverHit.point - _clickOffsetFromCenter;
-            moveTarget.z = DragPlaneDepth;
+            Debug.Assert(CardHandPlane.Instance != null);
+            moveTarget.z = CardHandPlane.Instance.CardPlanePosition.z;
+            // moveTarget.z = DragPlaneDepth;
             _currentMoveTarget = Vector3.Lerp(_rigidbody.position, moveTarget, _moveSpeed * Time.fixedDeltaTime);
         }
         
