@@ -2,14 +2,14 @@ using UnityEngine;
 
 namespace Snap
 {
-    public class PingpongCameraAngle : MonoBehaviour
+    public class PerAxisRotation : MonoBehaviour
     {
-        [SerializeField] private float _speed = 10f;
-        [SerializeField] private float _maxAngle = 45f;
+        [SerializeField] private Vector3 _axisRotationSpeed;
+       
         private void FixedUpdate()
         {
-            float angle = Mathf.PingPong(Time.time * _speed, _maxAngle);
-            transform.rotation = Quaternion.Euler(new Vector3(angle, 0f, 0f));
+            Vector3 newRotation = transform.rotation.eulerAngles + (_axisRotationSpeed * Time.fixedDeltaTime);
+            transform.rotation = Quaternion.Euler(newRotation);
         }
     }
 }
