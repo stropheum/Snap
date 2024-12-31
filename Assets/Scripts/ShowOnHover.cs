@@ -47,13 +47,7 @@ namespace Snap
             Ray ray = _mainCamera.ScreenPointToRay(mousePosition);
             bool isHovered = Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _layerMask)
                 && hit.collider.gameObject == gameObject;
-            
-            if (_isHovered == isHovered) { return; }
-            
-            //TODO: Temp code. Instead of instantly changing alpha, trigger coroutine to lerp alpha
-            _isHovered = isHovered;
-            _spriteRenderer.color = _isHovered ? Color.green : Color.white;
-            HoverStateChanged?.Invoke(_isHovered);
+            SetHoverState(isHovered);
         }
 
         /// <summary>
@@ -69,7 +63,19 @@ namespace Snap
             else
             {
                 _activeCardDragHandlers.Remove(cardDragHandler);
+                if (_activeCardDragHandlers.Count == 0)
+                {
+                    SetHoverState(false);
+                }
             }
+        }
+
+        private void SetHoverState(bool isHovered)
+        {
+            if (_isHovered == isHovered) { return; }
+            _isHovered = isHovered;
+            _spriteRenderer.color = _isHovered ? Color.green : Color.white;
+            HoverStateChanged?.Invoke(_isHovered);
         }
     }
 }
