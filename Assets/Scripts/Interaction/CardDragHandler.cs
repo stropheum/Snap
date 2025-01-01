@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Snap
+namespace Snap.Interaction
 {
     [RequireComponent(typeof(Rigidbody))]
     public class CardDragHandler : MonoBehaviour

@@ -1,0 +1,16 @@
+{
+    "name": "Card",
+    "rootNamespace": "Snap",
+    "references": [
+        "GUID:c4f0991e1a7876d4798c6d9a7af8d7e9"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

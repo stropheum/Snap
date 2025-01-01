@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Snap
+namespace Snap.Interaction
 {
     public class CardSlot : MonoBehaviour
     {

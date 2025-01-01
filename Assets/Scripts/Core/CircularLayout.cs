@@ -1,7 +1,6 @@
 using UnityEngine;
-using Math = Snap.Core.Math;
 
-namespace Snap
+namespace Snap.Core
 {
     public class CircularLayout : MonoBehaviour
     {

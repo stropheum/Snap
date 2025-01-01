@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Snap
+namespace Snap.Interaction
 {
     [RequireComponent(typeof(ShowOnHover))]
     public class CardLane : MonoBehaviour
