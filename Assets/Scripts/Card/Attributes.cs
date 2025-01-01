@@ -7,7 +7,22 @@ namespace Snap.Card
     {
         public enum CardID
         {
-            Temp,
+            AbsorbingMan,
+            Blade, Brood,
+            CassandraNova, ColleenWing,
+            Dracula,
+            GhostRider, Gorr, Gambit, Grandmaster,
+            Hazmat, Hela, Helicarrier,
+            Ironheart, IronLad, IronMan,
+            JaneFosterThor,
+            LukeCage,
+            Magick, MisterNegative, MODOK, MoonNight, Morbius, Mystique,
+            Odin,
+            Psylocke,
+            RevonaRennslayer, Rogue,
+            Sage, Sera, SilverSurfer, SuperSkrull,
+            TaskMaster,
+            Wong,
         }
         [field: SerializeField] public CardID ID { get; private set; }
         [field: SerializeField] public string Name { get; private set; }

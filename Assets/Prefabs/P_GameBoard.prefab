@@ -285,6 +285,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7618801775374509686}
     m_Modifications:
+    - target: {fileID: 246776192540706425, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_text
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 288453488970980976, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_text
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 681780209794915182, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 828219156954282725, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 913700041748615892, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -325,9 +341,185 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1268923594770830344, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_text
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652939816646642689, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_text
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2652046342292472075, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 51a74f1649cdbae45bf4bffb00b8d2d8, type: 3}
+    - target: {fileID: 2793834352632324224, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 51a74f1649cdbae45bf4bffb00b8d2d8, type: 3}
+    - target: {fileID: 2899491161477317071, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_text
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2901719931442373177, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_text
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3260202762481412513, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_text
+      value: Mister\nNegative
+      objectReference: {fileID: 0}
+    - target: {fileID: 3260202762481412513, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_fontSize
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398117305315818032, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_text
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402142627790506026, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_text
+      value: Sage
+      objectReference: {fileID: 0}
+    - target: {fileID: 3409643356618381766, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_text
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3489222444228092217, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
       propertyPath: m_Name
       value: User Hand
+      objectReference: {fileID: 0}
+    - target: {fileID: 4052704102596996069, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_text
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4367367752609003202, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: _attributes
+      value: 
+      objectReference: {fileID: 11400000, guid: 4a6db73aa4c75634294b653d10588ad1, type: 2}
+    - target: {fileID: 4509306395985188681, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: _attributes
+      value: 
+      objectReference: {fileID: 11400000, guid: 2cb176d0bc1cdd04c828b3b6edd724b3, type: 2}
+    - target: {fileID: 4788373463138296010, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 51a74f1649cdbae45bf4bffb00b8d2d8, type: 3}
+    - target: {fileID: 5000752869952625461, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_Size.x
+      value: 1.6770834
+      objectReference: {fileID: 0}
+    - target: {fileID: 5000752869952625461, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_Size.y
+      value: 1.8958334
+      objectReference: {fileID: 0}
+    - target: {fileID: 5000752869952625461, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 51a74f1649cdbae45bf4bffb00b8d2d8, type: 3}
+    - target: {fileID: 5000752869952625461, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5085009033045122194, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5199721487952387234, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: _attributes
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f3b36bea620d2b4d928b988334e244a, type: 2}
+    - target: {fileID: 5377900637930050807, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_Size.x
+      value: 6.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5377900637930050807, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_Size.y
+      value: 8.333333
+      objectReference: {fileID: 0}
+    - target: {fileID: 5377900637930050807, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9aa5cf43b9ee6c4498932c6a9c97ebe7, type: 3}
+    - target: {fileID: 5377900637930050807, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440594022983256160, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_text
+      value: Mystique
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469469261970758028, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_text
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5515508871119012229, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_text
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518414801628214175, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_text
+      value: Revona Rennslayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518414801628214175, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_fontSize
+      value: 7.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5657437622151798798, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_text
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5940440849714350816, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 51a74f1649cdbae45bf4bffb00b8d2d8, type: 3}
+    - target: {fileID: 5984511381749470954, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6352899110754612872, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: _attributes
+      value: 
+      objectReference: {fileID: 11400000, guid: c3618ee7f89844240897fca7350875a4, type: 2}
+    - target: {fileID: 6594334464677356106, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_text
+      value: Wong
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863360913175809399, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: _attributes
+      value: 
+      objectReference: {fileID: 11400000, guid: a90898461c4debb42abe3247d7eaf6f4, type: 2}
+    - target: {fileID: 6976472793224564694, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_text
+      value: IronHeart
+      objectReference: {fileID: 0}
+    - target: {fileID: 7415013839919610694, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: _attributes
+      value: 
+      objectReference: {fileID: 11400000, guid: 20bfbf445f5e82047841d94f556e5077, type: 2}
+    - target: {fileID: 7698240329598886107, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7908359140741389092, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8321454124142457150, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: _attributes
+      value: 
+      objectReference: {fileID: 11400000, guid: d9ad6b68560642643915a1bdcb7835b0, type: 2}
+    - target: {fileID: 8452619506196989358, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_text
+      value: Jane Foster Thor
+      objectReference: {fileID: 0}
+    - target: {fileID: 8452619506196989358, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_fontSize
+      value: 8.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 9062145755546448142, guid: 4dd048c5c9ab749458ac89f3a8ffbd8d, type: 3}
+      propertyPath: m_text
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
