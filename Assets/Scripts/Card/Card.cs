@@ -15,7 +15,6 @@ namespace Snap.Card
         [SerializeField] private TextMeshPro _abilityTxt;
         [SerializeField] private TextMeshPro _energyTxt;
         [SerializeField] private TextMeshPro _powerTxt;
-        private bool _isDirty;
 
         private void Start()
         {
@@ -33,23 +32,10 @@ namespace Snap.Card
         }
 #endif
 
-        private void Update()
-        {
-            CheckIsDirty();
-        }
-
         public void SetAttributes(AttributeObject attributeObject)
         {
             _attributeObject = attributeObject;
             ApplyAttributes();
-        }
-
-        private void CheckIsDirty()
-        {
-            if (!_isDirty) { return; }
-
-            ApplyAttributes();
-            _isDirty = false;
         }
 
         private void ApplyAttributes()
