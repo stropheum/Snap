@@ -5,6 +5,7 @@ namespace Snap.Interaction
     public class CardSlot : MonoBehaviour
     {
         public bool IsOccupied { get; set; }
+
         private void OnDrawGizmos()
         {
             Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, Vector3.one);

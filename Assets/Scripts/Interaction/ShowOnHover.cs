@@ -10,7 +10,7 @@ namespace Snap.Interaction
     public class ShowOnHover : MonoBehaviour
     {
         public event Action<bool> HoverStateChanged;
-        
+
         [SerializeField] private LayerMask _layerMask;
         private SpriteRenderer _spriteRenderer;
         private Camera _mainCamera;
@@ -25,7 +25,7 @@ namespace Snap.Interaction
 
         private void Start()
         {
-            InputManager.Point += InputManager_OnPoint; 
+            InputManager.Point += InputManager_OnPoint;
             CardDragHandler.DragStateChanged += CardDragHandler_OnDragStateChanged;
         }
 
@@ -34,7 +34,7 @@ namespace Snap.Interaction
             InputManager.Point -= InputManager_OnPoint;
             CardDragHandler.DragStateChanged -= CardDragHandler_OnDragStateChanged;
         }
-        
+
         /// <summary>
         /// Callback for the input system's mouse movement event
         /// </summary>
@@ -42,11 +42,12 @@ namespace Snap.Interaction
         private void InputManager_OnPoint(InputAction.CallbackContext context)
         {
             if (_mainCamera == null || _activeCardDragHandlers.Count == 0) { return; }
+
             var mousePosition = context.ReadValue<Vector2>();
 
             Ray ray = _mainCamera.ScreenPointToRay(mousePosition);
             bool isHovered = Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _layerMask)
-                && hit.collider.gameObject == gameObject;
+                             && hit.collider.gameObject == gameObject;
             SetHoverState(isHovered);
         }
 
@@ -56,23 +57,18 @@ namespace Snap.Interaction
         /// <param name="cardDragHandler"></param>
         private void CardDragHandler_OnDragStateChanged(CardDragHandler cardDragHandler)
         {
-            if (cardDragHandler.IsDragging)
-            {
-                _activeCardDragHandlers.Add(cardDragHandler);                
-            }
+            if (cardDragHandler.IsDragging) { _activeCardDragHandlers.Add(cardDragHandler); }
             else
             {
                 _activeCardDragHandlers.Remove(cardDragHandler);
-                if (_activeCardDragHandlers.Count == 0)
-                {
-                    SetHoverState(false);
-                }
+                if (_activeCardDragHandlers.Count == 0) { SetHoverState(false); }
             }
         }
 
         private void SetHoverState(bool isHovered)
         {
             if (_isHovered == isHovered) { return; }
+
             _isHovered = isHovered;
             _spriteRenderer.color = _isHovered ? Color.green : Color.white;
             HoverStateChanged?.Invoke(_isHovered);

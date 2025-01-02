@@ -11,7 +11,8 @@ namespace Snap.Interaction
     {
         public static event Action<CardDragHandler> DragStateChanged;
 
-        private bool IsHovered => _currentHoverHit.collider != null && _currentHoverHit.collider.gameObject == gameObject;
+        private bool IsHovered =>
+            _currentHoverHit.collider != null && _currentHoverHit.collider.gameObject == gameObject;
 
         public bool IsDragging
         {
@@ -33,7 +34,7 @@ namespace Snap.Interaction
         [SerializeField] private float _dragRotationDampening = 100f;
         [SerializeField] [Range(0f, 30f)] private float _maxDragRotationAngle = 30f;
         [SerializeField] private TextMeshPro _debugText;
-        
+
         private Rigidbody _rigidbody;
         private Camera _mainCamera;
         private Vector2 _currentMousePosition;
@@ -82,7 +83,7 @@ namespace Snap.Interaction
             if (IsDragging)
             {
                 Gizmos.color = Color.red;
-                Gizmos.DrawSphere(transform.position + _clickOffsetFromCenter, 0.25f);   
+                Gizmos.DrawSphere(transform.position + _clickOffsetFromCenter, 0.25f);
                 Gizmos.color = Color.blue;
                 Gizmos.DrawSphere(_currentMoveTarget, 0.25f);
             }
@@ -115,23 +116,24 @@ namespace Snap.Interaction
 
         private void UnbindInputCallbacks()
         {
-            InputManager.Point -= InputManager_OnPoint;            
+            InputManager.Point -= InputManager_OnPoint;
             InputManager.Click -= InputManager_OnClick;
         }
 
         private void InputManager_OnPoint(InputAction.CallbackContext context)
         {
             if (_mainCamera == null) { return; }
+
             _currentMousePosition = context.ReadValue<Vector2>();
 
             Ray ray = _mainCamera.ScreenPointToRay(_currentMousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _isDragging ? _draggingLayerMask : _defaultLayerMask))
+            if (Physics.Raycast(ray,
+                    out RaycastHit hit,
+                    Mathf.Infinity,
+                    _isDragging ? _draggingLayerMask : _defaultLayerMask))
             {
                 _currentHoverHit = hit;
-                if (_debugText != null)
-                {
-                    _debugText.text = "Hit: " + _currentHoverHit.collider.gameObject.name;
-                }
+                if (_debugText != null) { _debugText.text = "Hit: " + _currentHoverHit.collider.gameObject.name; }
             }
         }
 
@@ -146,7 +148,7 @@ namespace Snap.Interaction
             if (context.started)
             {
                 if (!IsHovered) { return; }
-                
+
                 _clickOffsetFromCenter = _currentHoverHit.point - _currentHoverHit.collider.transform.position;
                 IsDragging = true;
             }
@@ -159,12 +161,13 @@ namespace Snap.Interaction
                 _currentMoveTarget = Vector3.Lerp(_rigidbody.position, _origin, _moveSpeed * Time.fixedDeltaTime);
                 return;
             }
+
             Vector3 moveTarget = _currentHoverHit.point - _clickOffsetFromCenter;
             Debug.Assert(CardHandPlane.Instance != null);
             moveTarget.z = CardHandPlane.Instance.CardPlanePosition.z;
             _currentMoveTarget = Vector3.Lerp(_rigidbody.position, moveTarget, _moveSpeed * Time.fixedDeltaTime);
         }
-        
+
         private void HandleDragRotation()
         {
             if (!_isDragging)

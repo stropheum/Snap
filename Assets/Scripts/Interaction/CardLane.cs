@@ -6,13 +6,13 @@ namespace Snap.Interaction
     public class CardLane : MonoBehaviour
     {
         private const int CardSlotCount = 4;
-        
+
         [SerializeField] private CardSlot[] _cardSlots;
         private ShowOnHover _showOnHover;
 
         private void Awake()
         {
-            Debug.Assert(_cardSlots is { Length: CardSlotCount }, 
+            Debug.Assert(_cardSlots is { Length: CardSlotCount },
                 "Card lanes must have" + CardSlotCount + " child card slots");
             _showOnHover = GetComponent<ShowOnHover>();
         }
@@ -29,8 +29,7 @@ namespace Snap.Interaction
 
         private void ShowOnHoverOnHoverStateChanged(bool isHovering)
         {
-            
-            for (int i = 0; i < _cardSlots.Length; i++)
+            for (var i = 0; i < _cardSlots.Length; i++)
             {
                 CardSlot frontCard = _cardSlots[i];
                 CardSlot backCard = _cardSlots[_cardSlots.Length - 1 - i];
