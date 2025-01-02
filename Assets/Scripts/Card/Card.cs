@@ -22,16 +22,16 @@ namespace Snap.Card
             ApplyAttributes();
         }
 
+#if UNITY_EDITOR
         private void OnValidate()
         {
-            #if UNITY_EDITOR
             if (EditorApplication.isPlayingOrWillChangePlaymode && !EditorApplication.isPlaying)
             {
                 return;
             }
             EditorApplication.delayCall += ApplyAttributes;
-            #endif
         }
+#endif
 
         private void Update()
         {
