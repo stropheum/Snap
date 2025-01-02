@@ -7,7 +7,7 @@ namespace Snap.Card
     public class Deck : MonoBehaviour
     {
         [SerializeField] private Attributes.CardID[] _cardIDs = new Attributes.CardID[12];
-        private Queue<Attributes.CardID> _deckQueue = new();
+        private IList<Attributes.CardID> _deckList = new List<Attributes.CardID>();
 
         private void Awake()
         {
@@ -16,13 +16,13 @@ namespace Snap.Card
 
         private void Start()
         {
-            Reset();
+            ResetDeck();
         }
 
-        private void Reset()
+        private void ResetDeck()
         {
-            foreach (Attributes.CardID id in _cardIDs) { _deckQueue.Enqueue(id); }
-            _deckQueue = (Queue<Attributes.CardID>)_deckQueue.Shuffle();
+            foreach (Attributes.CardID id in _cardIDs) _deckList.Add(id);
+            _deckList = _deckList.Shuffle();
         }
     }
 }
