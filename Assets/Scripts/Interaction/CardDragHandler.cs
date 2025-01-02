@@ -10,8 +10,7 @@ namespace Snap.Interaction
     public class CardDragHandler : MonoBehaviour
     {
         public static event Action<CardDragHandler> DragStateChanged;
-        private const float DragPlaneDepth = -2f;
-        
+
         private bool IsHovered => _currentHoverHit.collider != null && _currentHoverHit.collider.gameObject == gameObject;
 
         public bool IsDragging
@@ -163,7 +162,6 @@ namespace Snap.Interaction
             Vector3 moveTarget = _currentHoverHit.point - _clickOffsetFromCenter;
             Debug.Assert(CardHandPlane.Instance != null);
             moveTarget.z = CardHandPlane.Instance.CardPlanePosition.z;
-            // moveTarget.z = DragPlaneDepth;
             _currentMoveTarget = Vector3.Lerp(_rigidbody.position, moveTarget, _moveSpeed * Time.fixedDeltaTime);
         }
         

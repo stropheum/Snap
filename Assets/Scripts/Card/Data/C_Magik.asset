@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c07e0f040680b4895c9bbfd68059b9, type: 3}
   m_Name: C_Magik
   m_EditorClassIdentifier: 
-  <ID>k__BackingField: 18
-  <Name>k__BackingField: Magick
-  <BgSprite>k__BackingField: {fileID: 21300000, guid: 9aa5cf43b9ee6c4498932c6a9c97ebe7, type: 3}
-  <MainSprite>k__BackingField: {fileID: 21300000, guid: c889b5d9638939d42af199df845f50d4, type: 3}
-  <Energy>k__BackingField: 3
-  <Power>k__BackingField: 2
-  <AbilityText>k__BackingField: 
+  <Attributes>k__BackingField:
+    <ID>k__BackingField: 18
+    <Name>k__BackingField: Magik
+    <BgSprite>k__BackingField: {fileID: 21300000, guid: 9aa5cf43b9ee6c4498932c6a9c97ebe7, type: 3}
+    <MainSprite>k__BackingField: {fileID: 21300000, guid: c889b5d9638939d42af199df845f50d4, type: 3}
+    <Energy>k__BackingField: 0
+    <Power>k__BackingField: 0
+    <AbilityText>k__BackingField: 
