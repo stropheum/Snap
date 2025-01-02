@@ -16,7 +16,7 @@ namespace Snap.Card
             Ironheart, IronLad, IronMan,
             JaneFosterThor,
             LukeCage,
-            Magick, MisterNegative, MODOK, MoonNight, Morbius, Mystique,
+            Magik, MisterNegative, MODOK, MoonNight, Morbius, Mystique,
             Odin,
             Psylocke,
             RevonaRennslayer, Rogue,

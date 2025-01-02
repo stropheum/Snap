@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0c07e0f040680b4895c9bbfd68059b9, type: 3}
-  m_Name: C_Magick
+  m_Name: C_Magik
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 18
   <Name>k__BackingField: Magick
