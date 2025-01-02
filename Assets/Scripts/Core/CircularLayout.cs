@@ -38,13 +38,14 @@ namespace Snap.Core
             for (var i = 0; i < transform.childCount; i++)
             {
                 float percent = i / (float)(childCount - 1);
-                Transform child = transform.GetChild(i);
                 float radians = MapToRadByGroupingAngle(percent) + _offsetRotationFromOrigin * Mathf.Deg2Rad;
-                var unitVector = new Vector3(Mathf.Cos(radians), Mathf.Sin(radians), 0);
+             
+                Transform child = transform.GetChild(i);
                 child.localRotation = Quaternion.Euler(new Vector3(0f, _yRotation, -90f + radians * Mathf.Rad2Deg));
+                
                 float mid = MapToRadByGroupingAngle(0.5f) + _offsetRotationFromOrigin * Mathf.Deg2Rad;
                 _directionTowardsReferenceCircle = new Vector3(Mathf.Cos(mid), Mathf.Sin(mid), 0).normalized;
-
+                var unitVector = new Vector3(Mathf.Cos(radians), Mathf.Sin(radians), 0);
                 Vector3 newPosition = unitVector * _radius - _directionTowardsReferenceCircle * _radius;
                 child.localPosition = newPosition;
             }
