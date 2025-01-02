@@ -41,7 +41,7 @@ namespace Snap.Card
             LukeCage,
             Magik,
             MisterNegative,
-            MODOK,
+            Modok,
             MoonNight,
             Morbius,
             Mystique,
