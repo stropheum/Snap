@@ -8,7 +8,14 @@ namespace Snap.Core
         [SerializeField] [Range(0f, 360f)] private float _groupingAngle;
         [SerializeField] [Range(0f, 360f)] private float _offsetRotationFromOrigin;
         [SerializeField] private float _yRotation = 5f;
+
+        public float GroupingAngle
+        {
+            get => _groupingAngle;
+            set => _groupingAngle = value;
+        }
         private Vector3 _directionTowardsReferenceCircle;
+        private int? _lastChildCount;
 
         private void OnDrawGizmosSelected()
         {
@@ -32,12 +39,19 @@ namespace Snap.Core
             UpdateChildPositions();
         }
 
-        private void UpdateChildPositions()
+        private void Update()
+        {
+            CheckChildCountChanged();            
+        }
+
+        public void UpdateChildPositions()
         {
             int childCount = transform.childCount;
-            for (var i = 0; i < transform.childCount; i++)
+            if (childCount == 0) { return; }
+            
+            for (var i = 0; i < childCount; i++)
             {
-                float percent = i / (float)(childCount - 1);
+                float percent = childCount > 1 ? i / (float)(childCount - 1) : 0.5f;
                 float radians = MapToRadByGroupingAngle(percent) + _offsetRotationFromOrigin * Mathf.Deg2Rad;
              
                 Transform child = transform.GetChild(i);
@@ -49,6 +63,14 @@ namespace Snap.Core
                 Vector3 newPosition = unitVector * _radius - _directionTowardsReferenceCircle * _radius;
                 child.localPosition = newPosition;
             }
+        }
+        
+        private void CheckChildCountChanged()
+        {
+            if (_lastChildCount.HasValue && _lastChildCount.Value == transform.childCount) { return; }
+
+            _lastChildCount = transform.childCount;
+            UpdateChildPositions();
         }
 
         private float MapToRadByGroupingAngle(float percent)

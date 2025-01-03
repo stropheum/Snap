@@ -28,7 +28,7 @@ namespace Snap.Card
                 _attributeObjectMap.Add(attributeObject.ID, attributeObject);
         }
 
-        public Card GenerateCard(Attributes.CardID id)
+        public Card GenerateCard(Attributes.CardID id, Transform parent)
         {
             if (!_attributeObjectMap.ContainsKey(id))
             {
@@ -36,7 +36,7 @@ namespace Snap.Card
                 return null;
             }
 
-            Card result = Instantiate(_cardPrefab, null);
+            Card result = Instantiate(_cardPrefab, parent);
             result.SetAttributes(_attributeObjectMap[id]);
             return result;
         }

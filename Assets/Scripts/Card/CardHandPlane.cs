@@ -1,7 +1,7 @@
 using Snap.Core;
 using UnityEngine;
 
-namespace Snap.Interaction
+namespace Snap.Card
 {
     [RequireComponent(typeof(BoxCollider))]
     public class CardHandPlane : Singleton<CardHandPlane>

@@ -6,6 +6,7 @@ using UnityEditor;
 
 namespace Snap.Card
 {
+    [RequireComponent(typeof(CardDragHandler))]
     public class Card : MonoBehaviour
     {
         [SerializeField] private AttributeObject _attributeObject;
@@ -15,7 +16,13 @@ namespace Snap.Card
         [SerializeField] private TextMeshPro _abilityTxt;
         [SerializeField] private TextMeshPro _energyTxt;
         [SerializeField] private TextMeshPro _powerTxt;
+        private CardDragHandler _cardDragHandler;
 
+        private void Awake()
+        {
+            _cardDragHandler = GetComponent<CardDragHandler>();
+        }
+        
         private void Start()
         {
             ApplyAttributes();
@@ -36,6 +43,15 @@ namespace Snap.Card
         {
             _attributeObject = attributeObject;
             ApplyAttributes();
+        }
+
+        /// <summary>
+        /// Setter for the drag handler's drag origin
+        /// </summary>
+        /// <param name="newOrigin">The new drag origin, in world space</param>
+        public void SetOrigin(Vector3 newOrigin)
+        {
+            _cardDragHandler.SetOrigin(newOrigin);
         }
 
         private void ApplyAttributes()

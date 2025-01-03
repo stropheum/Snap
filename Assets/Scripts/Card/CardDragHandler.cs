@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Snap.Interaction
+namespace Snap.Card
 {
     [RequireComponent(typeof(Rigidbody))]
     public class CardDragHandler : MonoBehaviour
@@ -51,13 +51,13 @@ namespace Snap.Interaction
             _mainCamera = Camera.main;
             Debug.Assert(_mainCamera != null);
             _rigidbody = GetComponent<Rigidbody>();
-            SetOrigin(transform.position);
-            SetOriginRotation(transform.rotation.normalized);
         }
 
         private void Start()
         {
             BindInputCallbacks();
+            SetOrigin(transform.position);
+            SetOriginRotation(transform.rotation.normalized);
         }
 
         private void Update()
@@ -78,6 +78,8 @@ namespace Snap.Interaction
 
         private void OnDrawGizmos()
         {
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawSphere(_origin, 0.25f);
             Gizmos.color = Color.green;
             Gizmos.DrawSphere(transform.position, 0.25f);
             if (IsDragging)
@@ -93,7 +95,7 @@ namespace Snap.Interaction
         /// Sets the origin that the card will return to when released
         /// </summary>
         /// <param name="newOrigin">The new origin of the card (world space)</param>
-        private void SetOrigin(Vector3 newOrigin)
+        public void SetOrigin(Vector3 newOrigin)
         {
             _origin = newOrigin;
         }

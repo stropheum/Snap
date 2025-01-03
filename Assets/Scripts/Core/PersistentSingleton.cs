@@ -9,7 +9,7 @@ namespace Snap.Core
         protected override void Awake()
         {
             base.Awake();
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(transform.root.gameObject);
         }
     }
 }

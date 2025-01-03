@@ -12,13 +12,17 @@ namespace Snap.Card
         private void Awake()
         {
             Debug.Assert(_cardIDs is { Length: 12 }, "Decks must have 12 cards.", gameObject);
-        }
-
-        private void Start()
-        {
             ResetDeck();
         }
 
+        public Attributes.CardID? Draw()
+        {
+            if (_deckList.Count == 0) { return null; }
+            Attributes.CardID result = _deckList[0];
+            _deckList.RemoveAt(0);
+            return result;
+        }
+        
         private void ResetDeck()
         {
             foreach (Attributes.CardID id in _cardIDs) _deckList.Add(id);

@@ -4,7 +4,7 @@ using Snap.Core;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Snap.Interaction
+namespace Snap.Card
 {
     [RequireComponent(typeof(SpriteRenderer))]
     public class ShowOnHover : MonoBehaviour
